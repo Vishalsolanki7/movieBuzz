@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Delete Data
+{% endblock %}
+
+{% block content %}
+    <br/><br/>
+    <div class="container" align="center">
+        <form method="post" action="/delete_data_submission/">
+            <div class="form-row align-items-center ">
+                <div class="col-auto">
+                    <label class="sr-only" for="inlineFormInput">Title</label>
+                    <input type="text" class="form-control mb-2" name="title" id="inlineFormInput" placeholder="Movie Title">
+                </div>
+                <div class="col-auto">
+                    <label class="sr-only" for="inlineFormInputGroup">Year</label>
+                    <div class="input-group mb-2">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text">@</div>
+                        </div>
+                        <input type="text" class="form-control" name="year" id="inlineFormInputGroup" placeholder="Username">
+                    </div>
+                </div>
+                <div class="col-auto">
+                    <button type="submit" class="btn btn-primary mb-2">Delete</button>
+                </div>
+            </div>
+        </form>
+    </div>
+{% endblock %}

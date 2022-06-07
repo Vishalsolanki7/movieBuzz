@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <br/><br/>
+    <div class="offset-3 col-md-6 text-white bg-dark">
+        {% with url_name=request.resolver_match.url_name %}
+            {% if url_name == 'new_movie' %}
+                <h2>Add New Movies</h2>
+            {% elif url_name == 'edit_movie' %}
+                <h2>Edit Movie: {{ post.title }}</h2>
+            {% else %}
+                <h2>Delete Movie: {{ post.title }}</h2>
+            {% endif %}
+        {% endwith %}
+        {% if messages %}
+            {% for message in messages %}
+                <div {% if message.tags %} class="alert alert-{{ message.tags }}" {% endif %} role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">X</span></button>
+                    <strong>{{ message }}</strong>
+                </div>
+            {% endfor %}
+        {% endif %}
+        <form method="post">
+            {% csrf_token %}
+            <div class="form-group">
+                {% for field in form %}
+                <label>{{ field.label_tag }}</label>
+                {{ field }}
+                {% endfor %}
+            <br/>
+                {% with url_name=request.resolver_match.url_name %}
+                    {% if url_name == 'new_movie' %}
+                        <div class="container" align="center"><button type="submit" class="btn btn-primary">Submit</button></div>
+                    {% elif url_name == 'edit_movie' %}
+                        <div class="container" align="center"><button type="submit" class="btn btn-success">Save</button></div>
+                    {% else %}
+                        <div class="container" align="center"><button type="submit" class="btn btn-danger">Delete</button></div>
+                    {% endif %}
+                {% endwith %}
+            </div>
+        </form>
+    </div>
+{% endblock %}

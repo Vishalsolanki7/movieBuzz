@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Add New Movies
+{% endblock %}
+
+{% block content %}
+    <br/><br/>
+    <div class="container p-3 my-3 bg-dark text-white" align="center">
+        <form method="post" action="/insert_data_submission/">
+            {% csrf_token %}
+            <div class="col-lg-6">
+                <div class="container" align="left"><label for="exampleInputTitle1">Movie Title</label></div>
+                <input type="text" class="form-control" name="title" id="exampleInputTitle1" placeholder="Title">
+            </div><br/>
+            <div class="col-lg-6">
+                <div class="container" align="left"><label for="exampleInputYear1">Released Year</label></div>
+                <input type="text" class="form-control" name="year" id="exampleInputYear1" placeholder="Year">
+            </div><br/>
+            <div class="col-lg-6">
+                <div class="container" align="left"><label for="exampleInputType1">Movie Type</label></div>
+                <input type="text" class="form-control" name="type" id="exampleInputType1" placeholder="Type">
+            </div><br/>
+            <div class="col-lg-6">
+                <div class="container" align="left"><label for="exampleInputDescription1">Description</label></div>
+                <input type="text" class="form-control" name="description" id="exampleInputDescription1" placeholder="Description">
+            </div><br/>
+            <div class="col-lg-6">
+                <div class="container" align="left"><label for="exampleInputDirector1">Director</label></div>
+                <input type="text" class="form-control" name="director" id="exampleInputDirector1" placeholder="Director">
+            </div><br/>
+            <div class="col-lg-6">
+                <div class="container" align="left"><label for="exampleInputActor1">Main Actor</label></div>
+                <input type="text" class="form-control" name="actor" id="exampleInputActor1" aria-describedby="emailHelp" placeholder="Actor">
+                <div class="container" align="left"><small  id="actorHelp" class="form-text text-muted">Please just input your favorite one</small></div>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+{% endblock %}

@@ -1,0 +1,95 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+
+{% endblock %}
+
+{% block content %}
+<head>
+<style>
+    th{
+        max-width: 100px;
+        text-align: center;
+    }
+    td{
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: 100px;
+    }
+    </style>
+</head>
+
+    <h2 style="color: white; text-align:center">Find your movies here</h2>
+    <table class="table table-striped table-dark">
+        <thead class="thead-dark" data-file-width="5px">
+            <tr>
+                <th scope="col">MovieID</th>
+                <th scope="col">Year</th>
+                <th scope="col">Annual Rank</th>
+                <th scope="col">Title</th>
+                <th scope="col">Description</th>
+                <th scope="col">Duration (min)</th>
+                <th scope="col">Movie Type</th>
+                <th scope="col">Rating</th>
+                <th scope="col">MetaScore</th>
+                <th scope="col">Votes</th>
+                <th scope="col">Gross Earning (million)</th>
+                <th scope="col">Director</th>
+                <th scope="col">Actor</th>
+                <th scope="col">Edit</th>
+                <th scope="col">Delete</th>
+            </tr>
+        </thead>
+        {% for movie in Movie %}
+        <tr>
+            <th scope="row"> {{ movie.movieid }}</th>
+            <td> {{ movie.year }}</td>
+            <td align="center"> {{ movie.rank }}</td>
+            <td> {{ movie.title }}</td>
+            <td> {{ movie.description }}</td>
+            <td align="center"> {{ movie.duration }}</td>
+            <td> {{ movie.genres }}</td>
+            <td align="center"> {{ movie.rating }}</td>
+            <td align="center"> {{ movie.metascore }}</td>
+            <td align="center"> {{ movie.votes }}</td>
+            <td align="center"> {{ movie.gross_earning_in_mil }}</td>
+            <td> {{ movie.director.name }}</td>
+            <td> {{ movie.actor.name }}</td>
+            <td><a href="{% url 'edit_movie' pk=movie.movieid %}"><button class="btn btn-success">Edit</button></a></td>
+            <td><a href="{% url 'delete_movie' pk=movie.movieid %}"><button class="btn btn-danger">Delete</button></a></td>
+        </tr>
+        {% endfor %}
+    </table>
+
+
+    <div class="pagination justify-content-center">
+        {% if Movie.has_other_pages %}
+            <nav aria-label="Page navigation example">
+            <ul class="pagination">
+            {% if Movie.has_previous %}
+                <li class="page-item"><a class="page-link" href="?page={{ Movie.previous_page_number }}">&laquo;</a></li>
+            {% else %}
+                <li class="page-item disabled"><a class="page-link" href="#">&laquo;</a></li>
+            {% endif %}
+            {% for i in Movie.paginator.page_range %}
+                {% if Movie.number == i %}
+                    <li class="page-item active" aria-current="page"><a class="page-link" href="?page={{ i }}">{{ i }} <span class="sr-only">(current)</span></a></li>
+                {% else %}
+                    <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+                {% endif %}
+            {% endfor %}
+            {% if Movie.has_next %}
+                <li class="page-item"><a class="page-link" href="?page={{ Movie.next_page_number }}">&raquo;</a></li>
+            {% else %}
+                <li class="page-item disabled"><a class="page-link" href="#">&raquo;</a></li>
+            {% endif %}
+            </ul>
+            </nav>
+        {% endif %}
+    </div>
+
+
+
+{% endblock %}

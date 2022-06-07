@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+
+{% endblock %}
+
+{% block content %}
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1 align="center" style="color: #d9534f">Registration Page!</h1>
+<div class="offset-3 col-md-6 text-white bg-dark" >
+
+    <form method="post" action="{% url 'register' %}">
+        {% csrf_token %}
+
+        {% if form.errors %}
+        <p>There are errors in the form!</p>
+        {% endif %}
+
+        {{ form }}
+
+        <input type="submit" value="register">
+    </form>
+</div>
+</body>
+{% endblock %}
